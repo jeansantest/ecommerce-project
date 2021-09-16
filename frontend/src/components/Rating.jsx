@@ -3,13 +3,14 @@ import { IconContext } from 'react-icons';
 import { BsStar } from 'react-icons/bs';
 import { BsStarHalf } from 'react-icons/bs';
 import { BsStarFill } from 'react-icons/bs';
+import './style/Rating.css';
 
-function Rating({ rating }) {
+function Rating({ rating, numReviews }) {
   return (
     <IconContext.Provider
-      value={{ color: '#CCCC00', className: 'global-class-name' }}
+      value={{ color: '#F1901E', className: 'global-class-name' }}
     >
-      <div>
+      <div className="rating-container">
         {rating >= 1 ? (
           <BsStarFill />
         ) : rating >= 0.5 ? (
@@ -44,7 +45,8 @@ function Rating({ rating }) {
           <BsStarHalf />
         ) : (
           <BsStar />
-        )}
+        )}{' '}
+        <span className="numReviews">{numReviews}</span>
       </div>
     </IconContext.Provider>
   );

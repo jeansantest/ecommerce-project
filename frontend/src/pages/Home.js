@@ -1,15 +1,18 @@
 import React from 'react';
+import Loading from '../components/Loading';
 import ProductItem from '../components/ProductItem';
 import { useProducts } from '../context/ProductsContext';
 
 function Home() {
-  const { products, loading } = useProducts();
+  const { products, loading, error } = useProducts();
   return (
     <div className="App">
       {loading ? (
-        <h1>Espere, está carregando</h1>
+        <Loading />
+      ) : error ? (
+        <p>{error}</p>
       ) : (
-        products.map((e) => <ProductItem product={e} />)
+        products.map((e, i) => <ProductItem product={e} key={i} />)
       )}
     </div>
   );
