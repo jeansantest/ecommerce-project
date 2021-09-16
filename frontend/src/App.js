@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import ProductItem from './components/ProductItem';
 import './App.css';
 
 function App() {
@@ -16,7 +17,11 @@ function App() {
   }, []);
   return (
     <div className="App">
-      {loading ? <h1>Espere, está carregando</h1> : <p>{products[0].name}</p>}
+      {loading ? (
+        <h1>Espere, está carregando</h1>
+      ) : (
+        products.map((e) => <ProductItem product={e} />)
+      )}
     </div>
   );
 }
