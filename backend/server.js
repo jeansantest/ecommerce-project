@@ -1,9 +1,17 @@
 import express from 'express';
-import data from './data.js';
+import mongoose from 'mongoose';
+import productRouter from './routers/productRouter.js';
 
 const app = express();
+mongoose.connect(
+  process.env.MONGODB_URL || 'mongodb://localhost/ecommerce-project'
+);
 
-app.get('/api/products', (req, res) => res.send(data.products));
+app.use('/api/products', productRouter);
+
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
 
 app.get('/', (req, res) => res.send('O server está pronto'));
 
